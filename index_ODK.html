@@ -1,0 +1,110 @@
+
+
+
+
+
+<!DOCTYPE html>
+ <html>
+  <head>
+     <title>DTM Draft</title>
+     <meta http-equiv="content-type" content="text/html; charset=UTF8">
+     <link href="css/site.css" rel="stylesheet" type="text/css" />
+     <link href="css/dc.css" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <script src="js/action_core.js" type="text/javascript" ></script>
+     <script src="js/d3.min.js" type="text/javascript" ></script>
+     <script src="js/crossfilter.js" type="text/javascript" ></script>
+     <script src="js/dc.min.js" type="text/javascript" ></script>
+     <script src="js/jquery.js" type="text/javascript" ></script>
+     <script src="data/lake_chad.js" type="text/javascript" ></script>
+      <script src="data/Admin2_CMR.js" type="text/javascript" ></script>
+
+     <!--<script src="data/Admin3_CMR_ExNord.js" type="text/javascript"></script>-->
+     <script type="text/javascript">
+	d3.json("php/data_core.php", function(data) {
+    			console.log(data);
+			var dataset
+			var propriete=Object.keys(data[0]);
+			dataset = data.map(function(d) { //console.log(d);
+			//Store all data in a simple array, tranforming string in number when relevant
+            var toda_prop={};
+			for(var i = 0, len = propriete.length; i < len; ++i)
+   				{
+					if (isNaN(d[propriete[i]]) == false)
+					{
+                        toda_prop[propriete[i]] = +d[propriete[i]];
+					}
+					else{toda_prop[propriete[i]] = d[propriete[i]];}
+				}
+			return toda_prop; })
+			console.log(dataset);
+
+			action(dataset);
+			});
+
+
+     </script>
+   </head>
+   <body>
+        <div class="container">
+            <div class="col-md-7">
+                <div class="row">
+               <!-- <img  src="http://nopbhaysolucion.tk/odk_cam/image/IOM_OIM_Blue.png">-->
+                        <h1 id="maptitle">DTM Round 3 Dashboard DRAFT</h1>
+                        <p>IOM - 2015, 10th November. Click any chart or on the map to filter the data set. <a href="http://localhost/odk_cam/index_ODK.html">Aller à la page des IDPS</a></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="reset btn btn-primary btn-sm" id="reset" href="javascript:dc.filterAll();dc.redrawAll();">Reset All</a>
+                    </div>
+                    <div id="dc-data-count" class="col-md-9">
+                        <span class="filter-count "></span> selected out of <span class="total-count "></span> records.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                        <h4># by Deplaced category</h4>
+                        <div id="type"></div>
+
+            </div>
+
+            <div class="col-md-6">
+                    <h4>Nombre de IDP par departement</h4>
+                     <div id="map"></div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4># IDP </h4>
+                        <div id="idp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4># Refugies</h4>
+                        <div id="ref"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4># Retournes</h4>
+                        <div id="ret"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4># Deplaces locaux</h4>
+                        <div id="depl"></div>
+                    </div>
+                </div>
+            </div>
+       </div>
+
+   </body>
+
+ </html>
+
+
+
+
+
+
+
+
+
